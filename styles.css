@@ -1,0 +1,296 @@
+:root {
+  --bg: #F2EDE1;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  overflow-x: hidden;
+}
+
+.composition {
+  width: 100vw;
+  height: 100svh;
+  min-height: 100vh;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.composition::selection,
+.composition *::selection {
+  background: transparent;
+  color: inherit;
+}
+
+.letters {
+  position: absolute;
+  top: 0;
+  bottom: 10vh; /* general bottom margin below letters */
+  left: 0;
+  right: 3vw; /* restore original extra space to the right */
+  pointer-events: auto; /* so letter clicks work */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.letter {
+  position: absolute;
+  width: 16.666vw; /* each letter gets 1/6 of viewport width */
+  display: flex;
+  justify-content: center; /* center image in X inside its slice */
+  transform: translateX(-50%); /* left is the center of the slice */
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.letter img {
+  display: block;
+  height: 20vw; /* all letters same size, scale with viewport width */
+  width: auto;
+  transform: translateY(0);
+  transition: transform 0.2s ease;
+}
+
+.letter:hover img {
+  transform: translateY(-12px);
+}
+
+.letter--l:hover img {
+  transform: translateX(10%) translateY(-12px);
+}
+
+/* Sink when a letter plays: down slow, up fast
+   End at the same height as hover (-12px) to avoid a visible step. */
+.letter.letter--playing {
+  animation: letter-sink 0.36s cubic-bezier(0.22, 0, 0.5, 1);
+}
+
+@keyframes letter-sink {
+  0% {
+    transform: translateX(-50%) translateY(0);
+  }
+  55% {
+    transform: translateX(-50%) translateY(14px);
+  }
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Individual placement: tweak top/left as needed */
+.letter--l {
+  top: 18%;
+  left: 7.5%;
+}
+
+.letter--l img {
+  /* nudge L slightly right within its own 1/6 slice */
+  transform: translateX(10%) translateY(0);
+}
+
+.letter--a-a1 {
+  top: 8%;
+  left: 26%;
+}
+
+.letter--p {
+  top: 58%;
+  left: 10%;
+}
+
+.letter--e-e1 {
+  top: 58%;
+  left: 27%;
+}
+
+.letter--s {
+  top: 72%;
+  left: 44%;
+}
+
+.letter--e-e2 {
+  top: 60%;
+  left: 60%;
+}
+
+.letter--t {
+  top: 50%;
+  left: 74%; /* slightly more to the left */
+}
+
+.letter--a-a2 {
+  top: 30%;
+  left: 90%; /* push last A further right */
+}
+
+/* Stickers: draggable PNGs, position manually like letters (top/left in %) */
+.stickers {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none; /* container doesn't block; each sticker has pointer-events */
+}
+
+.sticker {
+  position: absolute;
+  width: auto;
+  height: auto;
+  pointer-events: auto;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-drag: none;
+  transform: translate(-50%, -50%); /* position by center, like letters */
+}
+
+.sticker:active {
+  cursor: grabbing;
+}
+
+/* Size and position: tweak each sticker individually (desktop: static px) */
+.sticker--guitar {
+  max-width: 220px;
+  top: 79%;
+  left: 16%;
+}
+
+.sticker--lamp {
+  max-width: 70px;
+  top: 17%;
+  left: 75%;
+}
+
+.sticker--mug {
+  max-width: 62px;
+  top: 70%;
+  left: 83%;
+}
+
+.sticker--bag {
+  max-width: 120px;
+  top: 40%;
+  left: 30%;
+}
+
+.centerOverlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.estudios {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 120px;
+  height: auto;
+}
+
+.playWrap {
+  position: absolute;
+  left: 50%;
+  bottom: 6vh;
+  transform: translateX(-50%);
+  z-index: 3;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.play {
+  width: 90px;
+  height: auto;
+  transition: transform 0.2s ease;
+}
+
+.playWrap:hover .play {
+  transform: scale(1.1);
+}
+
+@media (max-width: 500px) {
+  /* Mobile styles */
+
+  .letter img {
+    height: 35vw;
+  } 
+
+  .letter--l {
+    top: 16%;
+    left: 12.5%; /* center of first quarter */
+  }
+
+  .letter--l img {
+    transform: none; /* reset extra nudge on mobile */
+  }
+
+  .letter--a-a1 {
+    top: 10%;
+    left: 42%; /* center of second quarter */
+  }
+
+  .letter--p {
+    top: 46%;
+    left: 18%;
+  }
+
+  .letter--e-e1 {
+    top: 40%;
+    left: 46%;
+  }
+
+  .letter--s {
+    top: 46%;
+    left: 75%;
+  }
+
+  .letter--e-e2 {
+    top: 70%;
+    left: 26%; /* second quarter – first quarter left free */
+  }
+
+  .letter--t {
+    top: 76%;
+    left: 48%;
+  }
+
+  .letter--a-a2 {
+    top: 74%;
+    left: 78%;
+  }
+
+  .playWrap {
+    bottom: 4vh;
+  }
+
+  .estudios {
+    width: 90px;
+  }
+
+  /* Stickers: smaller static sizes on mobile */
+  .sticker--guitar {
+    max-width: 140px;
+  }
+
+  .sticker--lamp {
+    max-width: 50px;
+    top: 10%;
+  }
+
+  .sticker--mug {
+    max-width: 45px;
+    top: 65%;
+  }
+
+  .sticker--bag {
+    max-width: 75px;
+    top: 35%;
+  }
+}
+
