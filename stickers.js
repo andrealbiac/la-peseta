@@ -1,5 +1,5 @@
 (function () {
-  var container = document.querySelector('.composition');
+  var container = document.querySelector('.cover-section');
   var guitar = document.querySelector('.sticker--guitar');
   var lamp = document.querySelector('.sticker--lamp');
   var mug = document.querySelector('.sticker--mug');
