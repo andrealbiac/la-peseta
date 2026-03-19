@@ -1,5 +1,6 @@
 :root {
   --bg: #F2EDE1;
+  --bottom-note-color: #471207;
 }
 
 @font-face {
@@ -230,14 +231,65 @@ body {
   max-width: calc(100vw - 48px);
   margin: 0;
   font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  font-size: 20px;
-  line-height: 1.35;
-  color: #111;
+  font-size: clamp(16px, 2vw, 22px);
+  line-height: 1.15;
+  color: var(--bottom-note-color);
   pointer-events: none;
 }
 
+
+/* IPAD STYLES */
+@media (max-width: 720px) {
+  .letters {
+    /* shorten the letter area on mobile */
+    bottom: 14vh;
+  }
+
+  .playWrap {
+    bottom: 12vh;
+  }
+
+  .bottomNote {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    bottom: 3vh;
+    text-align: center;
+    max-width: calc(100vw - 48px);
+  }
+
+  .sticker--guitar {
+    top: 72%;
+  }
+}
+
+
+/* MOBILE STYLES */
 @media (max-width: 500px) {
-  /* Mobile styles */
+  
+
+  .letters {
+    /* even shorter letter area for small phones */
+    bottom: 26vh;
+    transform: translateY(-20px);
+  }
+
+  .playWrap {
+    bottom: 16vh;
+  }
+
+  .play {
+    width: 13vh;
+    max-width: 140px;
+    height: auto;
+  }
+
+  .bottomNote {
+    bottom: 5vh;
+    font-size: 1.3rem;
+    max-width: 90vw;
+  }
 
   .letter img {
     height: 35vw;
@@ -285,10 +337,6 @@ body {
   .letter--a-a2 {
     top: 74%;
     left: 78%;
-  }
-
-  .playWrap {
-    bottom: 4vh;
   }
 
   .estudios {
