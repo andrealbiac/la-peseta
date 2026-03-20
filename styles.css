@@ -637,11 +637,48 @@ th {
 }
 
 .block-3 .opinions-about-div .about {
+  box-sizing: border-box;
   min-height: 100vh;
   margin: 0;
-  padding: 0;
-  background: var(--blue);
+  padding: 3rem 2rem 4rem;
+  text-align: left;
+  background-color: var(--blue);
+  background-image: url("./img/background-lines.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: var(--text-color);
+}
+
+.about-title {
+  margin: 0 0 1.75rem;
+  margin-left: 1.5rem;
+  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 2.1rem;
+  font-weight: 400;
+  line-height: 1.2;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.about p {
+  margin: 0 0 1.75rem;
+  margin-left: 1.5rem;
+  max-width: 26rem;
+  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.45;
+}
+
+.about-photo {
+  display: block;
+  margin-top: 3rem;
+  margin-left: auto;
+  margin-right: 2rem;
+  width: 24rem;
+  max-width: 100%;
+  height: auto;
+  transform: rotate(-4deg);
 }
 
 /* =============================================================================
@@ -825,7 +862,7 @@ th {
   }
 
   .summary-inner {
-    max-width: 92%;
+    max-width: 100%;
   }
 
   .summary-heading {
@@ -871,9 +908,29 @@ th {
     padding-block: 1.75rem 2rem;
   }
 
+  .block-3 .opinions-about-div .about {
+    min-height: unset;
+    padding: 2.75rem 1.25rem 2.5rem 1.75rem;
+  }
+
+  .about-title {
+    margin-left: 1.5rem;
+  }
+
+  .about p {
+    max-width: 20rem;
+    margin-left: 1.5rem;
+  }
+
+  .about-photo {
+    width: 16.5rem;
+    max-width: 85%;
+    margin-right: 1rem;
+  }
+
   .opinions-stack {
-    max-width: 22rem;
-    min-height: clamp(18rem, 58vh, 34rem);
+    max-width: 25rem;
+    min-height: clamp(22rem, 62vh, 38rem);
   }
 
   .opinions-about-div {
@@ -881,17 +938,17 @@ th {
   }
 
   .opinion-tile {
-    width: min(78vw, 17.25rem);
-    padding: clamp(0.55rem, 4.2%, 1rem) clamp(0.5rem, 3.8%, 0.9rem) clamp(0.65rem, 4.5%, 1.05rem);
+    width: min(92vw, 20.5rem);
+    padding: 0.85rem 0.75rem 1rem;
   }
 
   .opinion-tile-quote {
-    font-size: clamp(1.38rem, 7vw, 1.85rem);
+    font-size: clamp(1.45rem, 7vw, 1.95rem);
     line-height: 1.08;
   }
 
   .opinion-tile-author {
-    font-size: clamp(1.05rem, 4vw, 1.22rem);
+    font-size: clamp(1.1rem, 4vw, 1.3rem);
     line-height: 1.08;
   }
 
