@@ -1,277 +1,17 @@
+/* =============================================================================
+   Variables
+   ============================================================================= */
 :root {
-  --bg: #F2EDE1;
+  --bg: #f2ede1;
   --text-color: #471207;
   --bottom-note-color: var(--text-color);
   --block-section-pad: 48px;
-  /* Summary “Cursos y talleres” — mint circles (tune to Figma) */
   --summary-mint: #6dbb87;
 }
 
-.block-section {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
-  width: 100%;
-}
-
-.block-section > div {
-  padding: var(--block-section-pad);
-  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  font-weight: 400;
-}
-
-.block-section.block-1 {
-  position: relative;
-}
-
-.block-1 .hero {
-  position: relative;
-  z-index: 1; /* above .summary if layers overlap */
-  background: #EBD0B1;
-  display: flex;
-  justify-content: center;
-  align-items: stretch; /* full height so .hero-content can use space-between vertically */
-  overflow: visible; /* let decoration extend to viewport left */
-  flex-wrap: nowrap;
-}
-
-.block-1 .hero-content {
-  position: relative;
-  z-index: 2; /* above .hero-notebook decoration */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  box-sizing: border-box;
-  max-width: 40vw;
-  width: 100%;
-}
-
-.block-1 .hero-logo {
-  width: 18vw;
-  min-width: 120px;
-  max-width: 150px;
-  height: auto;
-  display: block;
-}
-
-.block-1 .hero-main-image {
-  width: 30vw;
-  max-width: 400px;
-  height: auto;
-  display: block;
-}
-
-.block-1 .hero-content p {
-  margin: 0;
-  font-size: 3vw;
-  line-height: 1.15;
-  color: var(--text-color);
-}
-
-.block-1 .hero-notebook {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  bottom: 0;
-  left: -50px;
-  width: calc(100% + var(--block-section-pad));
-  margin: 0;
-  padding: 0;
-  border: 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  pointer-events: none;
-}
-
-.block-1 .hero-notebook img {
-  width: 160px;
-  max-width: 100%;
-  height: auto;
-  margin: 0;
-  display: block;
-  max-height: 70vh;
-  object-fit: contain;
-}
-
-/* Summary: heading at top; list vertically centered in remaining space */
-.block-1 .summary {
-  position: relative;
-  z-index: 1;
-  background: var(--bg);
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
-  height: 100%;
-  min-height: 0;
-}
-
-.summary-inner {
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  max-width: min(34rem, 100%);
-  margin-inline: auto;
-}
-
-.summary-heading {
-  flex-shrink: 0;
-  width: 100%;
-  padding-bottom: 3rem;
-  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  font-size: 1.5rem;
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  text-align: center;
-  color: var(--text-color);
-}
-
-.summary-courses {
-  list-style: none;
-  margin: 0;
-  padding-bottom: 10rem;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-  width: fit-content;
-  max-width: 90%;
-  margin-inline: auto;
-}
-
-.summary-course {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 1.25rem;
-  overflow: visible;
-}
-
-.summary-course-badge {
-  flex-shrink: 0;
-  position: relative;
-  z-index: 0;
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 50%;
-  background: var(--summary-mint);
-  color: var(--text-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: visible;
-  padding-top: 0.12em;
-  box-sizing: border-box;
-  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  font-size: 2.75rem;
-  font-weight: 400;
-  line-height: 1;
-}
-
-.summary-course-body {
-  flex: 1;
-  min-width: 0;
-  padding-top: 0.15em;
-}
-
-
-.summary-course-kind {
-  display: block;
-  margin: 0 0 0.2em;
-  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  font-size: 1.05rem;
-  font-weight: 400;
-  line-height: 1.28;
-  color: var(--text-color);
-}
-
-.summary-course-title {
-  margin: 0 0 0.45em;
-  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  font-size: 1.6rem;
-  font-weight: 500;
-  line-height: 1.2;
-  color: var(--text-color);
-  text-decoration: underline;
-  text-underline-offset: 0.12em;
-}
-
-.summary-course-desc {
-  margin: 0;
-  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  font-size: 1.05rem;
-  line-height: 1.15;
-  color: var(--text-color);
-}
-
-.block-2 .index {
-  background: var(--bg);
-  position: sticky;
-  top: 0;
-  align-self: start;
-}
-
-.block-2 .courses {
-  background-color: var(--bg);
-  background-image: url("./img/background-lines.svg");
-  /* Fill the section using the (possibly longer) SVG */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 180vh; /* longer than 100vh to show sticky column */
-}
-
-.block-3 .opinions-about-div {
-  min-height: 100vh;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.block-3 {
-  grid-template-rows: 1fr;
-}
-
-.block-3 .playground {
-  background: var(--bg);
-  position: sticky;
-  top: 0;
-  align-self: start;
-}
-
-
-.block-3 .opinions-about-div .opinions-panel {
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  background: var(--text-color);
-  color: var(--bg);
-}
-
-.block-3 .opinions-about-div .about {
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  background: #B8D3FF;
-  color: var(--text-color);
-}
-
-.site-footer {
-  color: var(--text-color);
-  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  padding: 24px 48px 40px;
-}
-
-
+/* =============================================================================
+   Fonts
+   ============================================================================= */
 @font-face {
   font-family: "Kobe";
   src: url("./fonts/Kobe.woff2") format("woff2");
@@ -279,6 +19,9 @@
   font-style: normal;
 }
 
+/* =============================================================================
+   Base / reset
+   ============================================================================= */
 html,
 body {
   height: 100%;
@@ -291,7 +34,6 @@ body {
   font-weight: 400;
 }
 
-/* Default weight 400 (headings and emphasis are usually bolder in UA styles) */
 h1,
 h2,
 h3,
@@ -304,6 +46,9 @@ th {
   font-weight: 400;
 }
 
+/* =============================================================================
+   Cover section
+   ============================================================================= */
 .cover-section {
   width: 100vw;
   height: 100svh;
@@ -322,27 +67,27 @@ th {
 .letters {
   position: absolute;
   top: 0;
-  bottom: 10vh; /* general bottom margin below letters */
+  bottom: 15vh;
   left: 0;
-  right: 3vw; /* restore original extra space to the right */
-  pointer-events: auto; /* so letter clicks work */
+  right: 3vw;
+  pointer-events: auto;
   user-select: none;
   -webkit-user-select: none;
 }
 
 .letter {
   position: absolute;
-  width: 16.666vw; /* each letter gets 1/6 of viewport width */
+  width: 16.666vw;
   display: flex;
-  justify-content: center; /* center image in X inside its slice */
-  transform: translateX(-50%); /* left is the center of the slice */
+  justify-content: center;
+  transform: translateX(-50%);
   cursor: pointer;
   transition: transform 0.2s ease;
 }
 
 .letter img {
   display: block;
-  height: 20vw; /* all letters same size, scale with viewport width */
+  height: 20vw;
   width: auto;
   transform: translateY(0);
   transition: transform 0.2s ease;
@@ -356,8 +101,6 @@ th {
   transform: translateX(10%) translateY(-12px);
 }
 
-/* Sink when a letter plays: down slow, up fast
-   End at the same height as hover (-12px) to avoid a visible step. */
 .letter.letter--playing {
   animation: letter-sink 0.36s cubic-bezier(0.22, 0, 0.5, 1);
 }
@@ -374,19 +117,17 @@ th {
   }
 }
 
-/* Individual placement: tweak top/left as needed */
 .letter--l {
-  top: 18%;
+  top: 13%;
   left: 7.5%;
 }
 
 .letter--l img {
-  /* nudge L slightly right within its own 1/6 slice */
   transform: translateX(10%) translateY(0);
 }
 
 .letter--a-a1 {
-  top: 8%;
+  top: 6%;
   left: 26%;
 }
 
@@ -412,20 +153,19 @@ th {
 
 .letter--t {
   top: 50%;
-  left: 74%; /* slightly more to the left */
+  left: 74%;
 }
 
 .letter--a-a2 {
   top: 30%;
-  left: 90%; /* push last A further right */
+  left: 90%;
 }
 
-/* Stickers: draggable PNGs, position manually like letters (top/left in %) */
 .stickers {
   position: absolute;
   inset: 0;
   z-index: 4;
-  pointer-events: none; /* container doesn't block; each sticker has pointer-events */
+  pointer-events: none;
 }
 
 .sticker {
@@ -436,14 +176,13 @@ th {
   cursor: grab;
   user-select: none;
   -webkit-user-drag: none;
-  transform: translate(-50%, -50%); /* position by center, like letters */
+  transform: translate(-50%, -50%);
 }
 
 .sticker:active {
   cursor: grabbing;
 }
 
-/* Size and position: tweak each sticker individually (desktop: static px) */
 .sticker--guitar {
   max-width: 220px;
   top: 79%;
@@ -520,11 +259,325 @@ th {
   pointer-events: none;
 }
 
+/* =============================================================================
+   Block sections (shared grid)
+   ============================================================================= */
+.block-section {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: minmax(0, 1fr);
+  width: 100%;
+}
 
-/* IPAD STYLES */
+.block-section > div {
+  padding: var(--block-section-pad);
+  box-sizing: border-box;
+  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 400;
+}
+
+.block-section.block-1 {
+  position: relative;
+}
+
+/* =============================================================================
+   Block 1 — hero
+   ============================================================================= */
+.block-1 .hero {
+  position: relative;
+  z-index: 1;
+  background: #ebd0b1;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  overflow: visible;
+  flex-wrap: nowrap;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  max-width: 40vw;
+  width: 100%;
+}
+
+.hero-logo {
+  width: 18vw;
+  min-width: 120px;
+  max-width: 150px;
+  height: auto;
+  display: block;
+}
+
+.hero-main-image {
+  width: 30vw;
+  max-width: 350px;
+  padding: 2rem 0;
+  height: auto;
+  display: block;
+}
+
+.hero-content p {
+  margin: 0;
+  max-width: 90%;
+  font-size: 2.25rem;
+  line-height: 1.15;
+  color: var(--text-color);
+}
+
+.hero-notebook {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: -50px;
+  width: calc(100% + var(--block-section-pad));
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  pointer-events: none;
+}
+
+.hero-notebook img {
+  width: 160px;
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  display: block;
+  max-height: 70vh;
+  object-fit: contain;
+}
+
+/* =============================================================================
+   Block 1 — summary (Cursos y talleres)
+   ============================================================================= */
+.summary {
+  position: relative;
+  z-index: 1;
+  background: var(--bg);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-columns: 1fr;
+  align-self: stretch;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.summary-inner {
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+  max-width: min(34rem, 100%);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.summary-heading {
+  width: 100%;
+  max-width: min(34rem, 100%);
+  margin: 0;
+  margin-inline: auto;
+  padding: 0;
+  padding-bottom: 2rem;
+  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.summary-courses {
+  list-style: none;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 40vw;
+  align-self: stretch;
+}
+
+.summary-course {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.25rem;
+  overflow: visible;
+}
+
+.summary-course-badge {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: var(--summary-mint);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  padding-top: 0.12em;
+  box-sizing: border-box;
+  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 2.75rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.summary-course-body {
+  flex: 1;
+  min-width: 0;
+  padding-top: 0.15em;
+}
+
+.summary-course-kind {
+  display: block;
+  margin: 0 0 0.2em;
+  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.28;
+  color: var(--text-color);
+}
+
+.summary-course-title {
+  margin: 0 0 0.45em;
+  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--text-color);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.summary-course-desc {
+  margin: 0;
+  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.15;
+  color: var(--text-color);
+}
+
+/* =============================================================================
+   Block 2
+   ============================================================================= */
+.block-2 .index {
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  align-self: start;
+}
+
+.block-2 .courses {
+  background-color: var(--bg);
+  background-image: url("./img/background-lines.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 180vh;
+}
+
+/* =============================================================================
+   Block 3
+   ============================================================================= */
+.block-3 {
+  grid-template-rows: 1fr;
+}
+
+.block-3 .opinions-about-div {
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.block-3 .playground {
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  align-self: start;
+}
+
+.block-3 .opinions-about-div .opinions-panel {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: var(--text-color);
+  color: var(--bg);
+}
+
+.block-3 .opinions-about-div .about {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: #b8d3ff;
+  color: var(--text-color);
+}
+
+/* =============================================================================
+   Footer
+   ============================================================================= */
+.site-footer {
+  color: var(--text-color);
+  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  padding: 24px 48px 40px;
+}
+
+/* =============================================================================
+   Media queries
+   ============================================================================= */
+
+/* Two-column summary: responsive horizontal padding */
+@media (min-width: 721px) {
+  .summary {
+    padding-inline: clamp(0.75rem, 2.2vw, var(--block-section-pad));
+  }
+}
+
+/* Tight two-column: full-width summary stack + hero text tweak */
+@media (min-width: 721px) and (max-width: 1200px) {
+  .summary-inner {
+    max-width: 100%;
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .summary-heading {
+    max-width: 100%;
+    margin-inline: 0;
+    text-align: center;
+  }
+
+  .hero-content p {
+    font-size: 1.5rem;
+  }
+}
+
+/* iPad and below */
 @media (max-width: 720px) {
   .letters {
-    /* shorten the letter area on mobile */
     bottom: 14vh;
   }
 
@@ -532,65 +585,70 @@ th {
     bottom: 12vh;
   }
 
-  .block-1 .hero-content {
-    max-width: 70vw; /* narrower than desktop 40vw */
+  .hero-content {
+    max-width: 70vw;
   }
 
-  .block-1 .hero-logo {
+  .hero-logo {
     width: 22vw;
     min-width: 130px;
     max-width: 200px;
   }
 
-  .block-1 .hero-main-image {
+  .hero-main-image {
     width: 55vw;
     max-width: 420px;
   }
 
-  .block-1 .hero-content p {
+  .hero-content p {
     font-size: 2rem;
   }
 
-  /* notebook-circles: same fixed size as phone */
-  .block-1 .hero-notebook {
+  .hero-notebook {
     left: -20px;
     width: 100%;
   }
 
-  .block-1 .hero-notebook img {
+  .hero-notebook img {
     width: 88px;
     max-height: 50vh;
   }
 
-  .block-1 .summary {
+  .summary {
     padding-block: 0.5rem 1.5rem;
+    padding-inline: 0;
   }
 
-  .block-1 .summary .summary-inner {
+  .summary-inner {
     max-width: min(30rem, 100%);
+    width: 100%;
   }
 
-  .block-1 .summary .summary-heading {
+  .summary-heading {
     font-size: 1.625rem;
+    padding-top: 1rem;
+    padding-bottom: 0.75rem;
+    text-align: center;
   }
 
-  .block-1 .summary .summary-courses {
-    padding: 1rem 1.25rem;
+  .summary-courses {
+    padding: 1rem 0;
     gap: 2rem;
+    max-width: 100%;
   }
 
-  .block-1 .summary .summary-course-badge {
+  .summary-course-badge {
     width: 3.25rem;
     height: 3.25rem;
     font-size: 2.25rem;
   }
 
-  .block-1 .summary .summary-course-kind,
-  .block-1 .summary .summary-course-desc {
+  .summary-course-kind,
+  .summary-course-desc {
     font-size: 1.125rem;
   }
 
-  .block-1 .summary .summary-course-title {
+  .summary-course-title {
     font-size: 2rem;
   }
 
@@ -613,11 +671,9 @@ th {
   }
 }
 
-
-/* MOBILE STYLES */
+/* Mobile */
 @media (max-width: 500px) {
   .letters {
-    /* even shorter letter area for small phones */
     bottom: 26vh;
     transform: translateY(-20px);
   }
@@ -626,7 +682,6 @@ th {
     grid-template-columns: 1fr;
   }
 
-  /* Don’t force full viewport height on block-1; hero height comes from its own min-height */
   .block-section.block-1 {
     min-height: unset;
   }
@@ -635,45 +690,46 @@ th {
     min-height: 60vh;
   }
 
-  .block-1 .summary {
+  .summary {
     padding-block: 1.25rem 2rem;
-    /* Widen list: drop section horizontal pad inherited via .block-section > div */
     padding-inline: 0;
   }
 
-  .block-1 .summary .summary-inner {
-    max-width: 100%;
-    width: 100%;
-  }
-
-  .block-1 .summary .summary-heading {
-    margin-bottom: 0.875rem;
-    font-size: 1.25rem;
-  }
-
-  .block-1 .summary .summary-courses {
-    padding: 1rem 0.5rem;
-    gap: 1.5rem;
+  .summary-inner {
     max-width: 80%;
   }
 
-  .block-1 .summary .summary-course {
+  .summary-heading {
+    margin-bottom: 3rem;
+    padding-top: 2rem;
+    padding-bottom: 0;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .summary-courses {
+    padding: 1rem 0;
+    gap: 1.5rem;
+    max-width: 100%;
+  }
+
+  .summary-course {
     gap: 1rem;
   }
 
-  .block-1 .summary .summary-course-badge {
-    width: 2.75rem;
-    height: 2.75rem;
-    font-size: 2rem;
+  .summary-course-badge {
+    width: 3rem;
+    height: 3rem;
+    font-size: 2.25rem;
   }
 
-  .block-1 .summary .summary-course-kind,
-  .block-1 .summary .summary-course-desc {
-    font-size: 1rem;
-  }
-
-  .block-1 .summary .summary-course-title {
+  .summary-course-kind,
+  .summary-course-desc {
     font-size: 1.2rem;
+  }
+
+  .summary-course-title {
+    font-size: 1.45rem;
   }
 
   .playWrap {
@@ -692,53 +748,52 @@ th {
     max-width: 90vw;
   }
 
-
-  .block-1 .hero-content {
-    max-width: min(85vw, 22rem); /* tighter than ipad, readable line length */
+  .hero-content {
+    max-width: min(85vw, 22rem);
   }
 
-  .block-1 .hero-content p {
-    font-size: 1.25rem;
+  .hero-content p {
+    font-size: 1.9rem;
   }
 
-  .block-1 .hero-logo {
+  .hero-logo {
     width: 34vw;
     min-width: 110px;
     max-width: 160px;
   }
 
-  .block-1 .hero-main-image {
+  .hero-main-image {
     width: 65vw;
+    padding: 3.5rem 0;
     max-width: 340px;
   }
 
-  /* Sit inside .hero (no viewport pull); nudge circles right */
-  .block-1 .hero-notebook {
+  .hero-notebook {
     left: -20px;
     width: 100%;
   }
 
-  .block-1 .hero-notebook img {
+  .hero-notebook img {
     width: 88px;
     max-height: 50vh;
   }
 
   .letter img {
     height: 35vw;
-  } 
+  }
 
   .letter--l {
     top: 16%;
-    left: 12.5%; /* center of first quarter */
+    left: 12.5%;
   }
 
   .letter--l img {
-    transform: none; /* reset extra nudge on mobile */
+    transform: none;
   }
 
   .letter--a-a1 {
     top: 10%;
-    left: 42%; /* center of second quarter */
+    left: 42%;
   }
 
   .letter--p {
@@ -758,7 +813,7 @@ th {
 
   .letter--e-e2 {
     top: 70%;
-    left: 26%; /* second quarter – first quarter left free */
+    left: 26%;
   }
 
   .letter--t {
@@ -775,7 +830,6 @@ th {
     width: 90px;
   }
 
-  /* Stickers: smaller static sizes on mobile */
   .sticker--guitar {
     max-width: 140px;
   }
@@ -795,4 +849,3 @@ th {
     top: 35%;
   }
 }
-
