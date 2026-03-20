@@ -7,6 +7,11 @@
   --bottom-note-color: var(--text-color);
   --block-section-pad: 48px;
   --summary-mint: #6dbb87;
+  /* Palette */
+  --dark-green: #00402e;
+  --red: #ff1935;
+  --yellow: #fdbb00;
+  --blue: #b8d3ff;
 }
 
 /* =============================================================================
@@ -526,13 +531,116 @@ th {
   padding: 0;
   background: var(--text-color);
   color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Stacked opinion cards (one colored SVG per tile) */
+.opinions-stack {
+  position: relative;
+  width: 100%;
+  max-width: 32rem;
+  min-height: clamp(27rem, 78vh, 52rem);
+  margin: 0 auto;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.opinions-stack:focus-visible {
+  box-shadow: 0 0 0 3px var(--yellow);
+  border-radius: 4px;
+}
+
+.opinion-tile {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(92vw, 26rem);
+  aspect-ratio: 681 / 852;
+  height: auto;
+  box-sizing: border-box;
+  padding: clamp(0.85rem, 5.8%, 1.65rem) clamp(0.8rem, 5.2%, 1.45rem) clamp(1rem, 6.2%, 1.65rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translate(-50%, -50%) rotate(var(--opinion-tilt, 0deg));
+  transition: z-index 0s;
+  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+
+.opinion-tile:nth-child(1) {
+  z-index: 4;
+}
+
+.opinion-tile:nth-child(2) {
+  z-index: 3;
+}
+
+.opinion-tile:nth-child(3) {
+  z-index: 2;
+}
+
+.opinion-tile:nth-child(4) {
+  z-index: 1;
+}
+
+.opinion-tile--blue {
+  --opinion-tilt: -4deg;
+  background-image: url("./img/tile-blue.svg");
+  color: var(--text-color);
+}
+
+.opinion-tile--yellow {
+  --opinion-tilt: 6deg;
+  background-image: url("./img/tile-yellow.svg");
+  color: var(--text-color);
+}
+
+.opinion-tile--red {
+  --opinion-tilt: -8deg;
+  background-image: url("./img/tile-red.svg");
+  color: var(--text-color);
+}
+
+.opinion-tile--dark-green {
+  --opinion-tilt: 5deg;
+  background-image: url("./img/tile-green.svg");
+  color: var(--bg);
+}
+
+.opinion-tile-quote {
+  margin: 0;
+  font-size: clamp(1.55rem, 5.2vw, 2.45rem);
+  font-weight: 400;
+  line-height: 1.12;
+}
+
+.opinion-tile-author {
+  margin: 0;
+  align-self: flex-end;
+  font-size: clamp(1rem, 2.8vw, 1.25rem);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.12;
+  text-align: right;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opinion-tile {
+    transition: none;
+  }
 }
 
 .block-3 .opinions-about-div .about {
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  background: #b8d3ff;
+  background: var(--blue);
   color: var(--text-color);
 }
 
@@ -669,6 +777,27 @@ th {
   .sticker--guitar {
     top: 72%;
   }
+
+  /* Opinions: larger type; roomier stack on tablet */
+  .opinions-stack {
+    max-width: 36rem;
+    min-height: clamp(28rem, 82vh, 58rem);
+  }
+
+  .opinion-tile {
+    width: min(94vw, 29rem);
+    padding: clamp(1.05rem, 6.2%, 1.9rem) clamp(1rem, 5.8%, 1.75rem) clamp(1.15rem, 6.8%, 1.9rem);
+  }
+
+  .opinion-tile-quote {
+    font-size: clamp(1.85rem, 5.8vw, 2.85rem);
+    line-height: 1.1;
+  }
+
+  .opinion-tile-author {
+    font-size: clamp(1.2rem, 3.4vw, 1.55rem);
+    line-height: 1.1;
+  }
 }
 
 /* Mobile */
@@ -730,6 +859,40 @@ th {
 
   .summary-course-title {
     font-size: 1.45rem;
+  }
+
+  /* Opinions: panel height = content, not 100vh */
+  .block-3 .opinions-about-div {
+    min-height: unset;
+  }
+
+  .block-3 .opinions-about-div .opinions-panel {
+    min-height: unset;
+    padding-block: 1.75rem 2rem;
+  }
+
+  .opinions-stack {
+    max-width: 22rem;
+    min-height: clamp(18rem, 58vh, 34rem);
+  }
+
+  .opinions-about-div {
+    min-height: unset;
+  }
+
+  .opinion-tile {
+    width: min(78vw, 17.25rem);
+    padding: clamp(0.55rem, 4.2%, 1rem) clamp(0.5rem, 3.8%, 0.9rem) clamp(0.65rem, 4.5%, 1.05rem);
+  }
+
+  .opinion-tile-quote {
+    font-size: clamp(1.38rem, 7vw, 1.85rem);
+    line-height: 1.08;
+  }
+
+  .opinion-tile-author {
+    font-size: clamp(1.05rem, 4vw, 1.22rem);
+    line-height: 1.08;
   }
 
   .playWrap {
