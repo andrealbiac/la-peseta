@@ -3,6 +3,8 @@
   --text-color: #471207;
   --bottom-note-color: var(--text-color);
   --block-section-pad: 48px;
+  /* Summary “Cursos y talleres” — mint circles (tune to Figma) */
+  --summary-mint: #6dbb87;
 }
 
 .block-section {
@@ -16,6 +18,7 @@
 .block-section > div {
   padding: var(--block-section-pad);
   font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 400;
 }
 
 .block-section.block-1 {
@@ -94,17 +97,123 @@
   object-fit: contain;
 }
 
+/* Summary: heading at top; list vertically centered in remaining space */
 .block-1 .summary {
   position: relative;
   z-index: 1;
   background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  height: 100%;
+  min-height: 0;
+}
+
+.summary-inner {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: min(34rem, 100%);
+  margin-inline: auto;
+}
+
+.summary-heading {
+  flex-shrink: 0;
+  width: 100%;
+  padding-bottom: 3rem;
+  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.summary-courses {
+  list-style: none;
+  margin: 0;
+  padding-bottom: 10rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  width: fit-content;
+  max-width: 90%;
+  margin-inline: auto;
+}
+
+.summary-course {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.25rem;
+  overflow: visible;
+}
+
+.summary-course-badge {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: var(--summary-mint);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  padding-top: 0.12em;
+  box-sizing: border-box;
+  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 2.75rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.summary-course-body {
+  flex: 1;
+  min-width: 0;
+  padding-top: 0.15em;
+}
+
+
+.summary-course-kind {
+  display: block;
+  margin: 0 0 0.2em;
+  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.28;
+  color: var(--text-color);
+}
+
+.summary-course-title {
+  margin: 0 0 0.45em;
+  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--text-color);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.summary-course-desc {
+  margin: 0;
+  font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.15;
+  color: var(--text-color);
 }
 
 .block-2 .index {
   background: var(--bg);
-}
-
-.block-2 .index {
   position: sticky;
   top: 0;
   align-self: start;
@@ -179,6 +288,20 @@ body {
 body {
   background: var(--bg);
   overflow-x: hidden;
+  font-weight: 400;
+}
+
+/* Default weight 400 (headings and emphasis are usually bolder in UA styles) */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+b,
+th {
+  font-weight: 400;
 }
 
 .cover-section {
@@ -428,8 +551,47 @@ body {
     font-size: 2rem;
   }
 
+  /* notebook-circles: same fixed size as phone */
+  .block-1 .hero-notebook {
+    left: -20px;
+    width: 100%;
+  }
+
   .block-1 .hero-notebook img {
-    width: 140px;
+    width: 88px;
+    max-height: 50vh;
+  }
+
+  .block-1 .summary {
+    padding-block: 0.5rem 1.5rem;
+  }
+
+  .block-1 .summary .summary-inner {
+    max-width: min(30rem, 100%);
+  }
+
+  .block-1 .summary .summary-heading {
+    font-size: 1.625rem;
+  }
+
+  .block-1 .summary .summary-courses {
+    padding: 1rem 1.25rem;
+    gap: 2rem;
+  }
+
+  .block-1 .summary .summary-course-badge {
+    width: 3.25rem;
+    height: 3.25rem;
+    font-size: 2.25rem;
+  }
+
+  .block-1 .summary .summary-course-kind,
+  .block-1 .summary .summary-course-desc {
+    font-size: 1.125rem;
+  }
+
+  .block-1 .summary .summary-course-title {
+    font-size: 2rem;
   }
 
   .bottomNote {
@@ -454,8 +616,6 @@ body {
 
 /* MOBILE STYLES */
 @media (max-width: 500px) {
-  
-
   .letters {
     /* even shorter letter area for small phones */
     bottom: 26vh;
@@ -473,6 +633,47 @@ body {
 
   .block-1 .hero {
     min-height: 60vh;
+  }
+
+  .block-1 .summary {
+    padding-block: 1.25rem 2rem;
+    /* Widen list: drop section horizontal pad inherited via .block-section > div */
+    padding-inline: 0;
+  }
+
+  .block-1 .summary .summary-inner {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .block-1 .summary .summary-heading {
+    margin-bottom: 0.875rem;
+    font-size: 1.25rem;
+  }
+
+  .block-1 .summary .summary-courses {
+    padding: 1rem 0.5rem;
+    gap: 1.5rem;
+    max-width: 80%;
+  }
+
+  .block-1 .summary .summary-course {
+    gap: 1rem;
+  }
+
+  .block-1 .summary .summary-course-badge {
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 2rem;
+  }
+
+  .block-1 .summary .summary-course-kind,
+  .block-1 .summary .summary-course-desc {
+    font-size: 1rem;
+  }
+
+  .block-1 .summary .summary-course-title {
+    font-size: 1.2rem;
   }
 
   .playWrap {
