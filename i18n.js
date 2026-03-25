@@ -67,13 +67,11 @@ const EMBEDDED_I18N = {"es":{"meta.title":"La Peseta - Estudios","meta.descripti
   function updateToggle(dict, lang) {
     const wrap = document.querySelector("[data-lang-toggle]");
     const btn = document.querySelector("[data-lang-switch]");
-    const label = document.querySelector("[data-lang-toggle-label]");
-    if (!wrap || !btn || !label) return;
+    if (!wrap || !btn) return;
 
     const isEn = lang === "en";
     btn.setAttribute("aria-checked", isEn ? "true" : "false");
     btn.setAttribute("aria-label", isEn ? dict["ui.to_es"] : dict["ui.to_en"]);
-    label.textContent = isEn ? "Español" : "English";
     wrap.classList.toggle("lang-toggle--en", isEn);
   }
 

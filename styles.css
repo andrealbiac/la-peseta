@@ -66,7 +66,7 @@ th {
   overflow: hidden;
 }
 
-/* Language toggle (Tailwind-style switch, top-right of cover) */
+/* Language toggle (SPA | switch | ENG), top-right of cover */
 .lang-toggle {
   position: absolute;
   top: 1.1rem;
@@ -74,22 +74,29 @@ th {
   z-index: 40;
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.3rem;
   pointer-events: auto;
 }
 
-.lang-toggle--en {
-  flex-direction: row-reverse;
-}
-
-.lang-toggle__label {
+.lang-toggle__code {
   font-family: "Kobe", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.82rem;
   font-weight: 400;
-  color: var(--text-color);
   line-height: 1;
+  color: var(--text-color);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  opacity: 0.38;
+  min-width: 1.65rem;
+  text-align: center;
   -webkit-user-select: none;
   user-select: none;
+  transition: opacity 0.15s ease;
+}
+
+.lang-toggle:not(.lang-toggle--en) .lang-toggle__code--spa,
+.lang-toggle.lang-toggle--en .lang-toggle__code--eng {
+  opacity: 1;
 }
 
 .lang-toggle__switch {
