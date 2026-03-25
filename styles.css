@@ -1539,6 +1539,7 @@ th {
     height: 12vh;
     width: 100%;
     margin-top: -2rem;
+    max-height: 12vh;
   }
 
   .site-footer {
