@@ -137,7 +137,10 @@
       var gutter = 24;
       // All letters share the same visual height,
       // except estudios-bullet which is 40% smaller.
-      var targetH = Math.min(190, Math.max(90, H * 0.28));
+      var isMobile = window.matchMedia("(max-width: 500px)").matches;
+      var targetH = isMobile
+        ? Math.min(156, Math.max(78, H * 0.24))
+        : Math.min(190, Math.max(90, H * 0.28));
 
       for (var i = 0; i < loaded.length; i++) {
         var item = loaded[i];

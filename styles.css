@@ -1537,7 +1537,8 @@ th {
 
   .playground__stage {
     height: 12vh;
-    width: 90%;
+    width: 100%;
+    margin-top: -2rem;
   }
 
   .site-footer {
