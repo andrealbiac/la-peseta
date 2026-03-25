@@ -885,26 +885,39 @@ th {
   min-height: 100vh;
   margin: 0;
   padding: 0;
+  padding-inline: clamp(0.75rem, 3vw, 3rem);
+  box-sizing: border-box;
   background: var(--text-color);
   color: var(--bg);
   display: flex;
   align-items: center;
   justify-content: center;
+  container-name: opinions-panel;
+  container-type: inline-size;
 }
 
 /* Stacked opinion cards (one colored SVG per tile) */
 .opinions-stack {
   position: relative;
   width: 100%;
-  max-width: 32rem;
-  min-height: clamp(27rem, 78vh, 52rem);
+  max-width: 100%;
   margin: 0 auto;
+  box-sizing: border-box;
+  /* Fallback when container queries unavailable */
+  min-height: clamp(25rem, 44vw, 48rem);
   cursor: grab;
   touch-action: pan-y;
   -webkit-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   outline: none;
+}
+
+@supports (width: 1cqw) {
+  .opinions-stack {
+    /* ~tile aspect (852/681) so stack height tracks panel width */
+    min-height: clamp(25rem, calc(76cqw * 852 / 681), 58rem);
+  }
 }
 
 .opinions-stack.is-dragging {
@@ -921,7 +934,7 @@ th {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: min(92vw, 26rem);
+  width: min(86%, 100%);
   aspect-ratio: 681 / 852;
   height: auto;
   box-sizing: border-box;
@@ -981,19 +994,31 @@ th {
 
 .opinion-tile-quote {
   margin: 0;
-  font-size: clamp(1.55rem, 5.2vw, 2.45rem);
+  font-size: clamp(1.45rem, 4.6vw, 2.1rem);
   font-weight: 400;
   line-height: 1.12;
+}
+
+@supports (font-size: 1cqi) {
+  .opinion-tile-quote {
+    font-size: clamp(1.45rem, 7cqi, 2.65rem);
+  }
 }
 
 .opinion-tile-author {
   margin: 0;
   align-self: flex-end;
-  font-size: clamp(1rem, 2.8vw, 1.25rem);
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
   font-style: normal;
   font-weight: 400;
   line-height: 1.12;
   text-align: right;
+}
+
+@supports (font-size: 1cqi) {
+  .opinion-tile-author {
+    font-size: clamp(1rem, 3.55cqi, 1.35rem);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1381,27 +1406,6 @@ th {
   .sticker--guitar {
     top: 72%;
   }
-
-  /* Opinions: larger type; roomier stack on tablet */
-  .opinions-stack {
-    max-width: 36rem;
-    min-height: clamp(28rem, 82vh, 58rem);
-  }
-
-  .opinion-tile {
-    width: min(94vw, 29rem);
-    padding: clamp(1.05rem, 6.2%, 1.9rem) clamp(1rem, 5.8%, 1.75rem) clamp(1.15rem, 6.8%, 1.9rem);
-  }
-
-  .opinion-tile-quote {
-    font-size: clamp(1.85rem, 5.8vw, 2.85rem);
-    line-height: 1.1;
-  }
-
-  .opinion-tile-author {
-    font-size: clamp(1.2rem, 3.4vw, 1.55rem);
-    line-height: 1.1;
-  }
 }
 
 /* Mobile */
@@ -1534,8 +1538,13 @@ th {
   }
 
   .opinions-stack {
-    max-width: 25rem;
-    min-height: clamp(22rem, 62vh, 38rem);
+    min-height: clamp(20rem, 54vh, 34rem);
+  }
+
+  @supports (width: 1cqw) {
+    .opinions-stack {
+      min-height: clamp(20rem, calc(78cqw * 852 / 681), 36rem);
+    }
   }
 
   .opinions-about-div {
@@ -1543,17 +1552,16 @@ th {
   }
 
   .opinion-tile {
-    width: min(92vw, 20.5rem);
     padding: 0.85rem 0.75rem 1rem;
   }
 
   .opinion-tile-quote {
-    font-size: clamp(1.45rem, 7vw, 1.95rem);
+    font-size: clamp(1.35rem, 6.2vw, 1.8rem);
     line-height: 1.08;
   }
 
   .opinion-tile-author {
-    font-size: clamp(1.1rem, 4vw, 1.3rem);
+    font-size: clamp(1rem, 3.6vw, 1.2rem);
     line-height: 1.08;
   }
 
