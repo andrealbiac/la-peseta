@@ -14,7 +14,7 @@
   --blue: #b8d3ff;
   --index-pill-1: #a0bdf2;
   --index-pill-2: #6dbb87;
-  --index-pill-3: #ebd0b1;
+  --index-pill-3: #fcc3c3;
 }
 
 /* =============================================================================
@@ -535,6 +535,10 @@ th {
   line-height: 1;
 }
 
+.summary-course:nth-child(3) .summary-course-badge {
+  background: #fcc3c3;
+}
+
 .summary-course-body {
   flex: 1;
   min-width: 0;
@@ -729,7 +733,7 @@ th {
 }
 
 #course-taller .course-num {
-  color: #ebd0b1;
+  color: #fcc3c3;
 }
 
 .course-heading {
@@ -1051,7 +1055,7 @@ th {
   margin: 0;
   padding: 3rem 2rem 4rem;
   text-align: left;
-  background-color: var(--blue);
+  background-color: #D5E5FF;
   background-image: url("./img/background-lines.svg");
   background-size: cover;
   background-position: center;
@@ -1110,7 +1114,6 @@ th {
   justify-content: space-between;
   gap: 1rem 2.5rem;
   pointer-events: none;
-  justify-content: flex-end;
 }
 
 .site-footer-links {
@@ -1119,7 +1122,14 @@ th {
   align-items: center;
   gap: 1rem 1.75rem;
   margin: 0;
+  margin-right: auto;
   padding: 0;
+  pointer-events: auto;
+}
+
+.site-footer-credit {
+  margin: 0;
+  margin-left: auto;
   pointer-events: auto;
 }
 
@@ -1556,6 +1566,11 @@ th {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.55rem;
+  }
+
+  .site-footer-credit {
+    margin-top: 0.2rem;
+    margin-left: 0;
   }
 
   .opinions-stack {
