@@ -1512,7 +1512,7 @@ th {
 
   .block-3 .opinions-about-div .opinions-panel {
     min-height: unset;
-    padding-block: 1.75rem 2rem;
+    padding-block: 2.5rem 2.75rem;
   }
 
   .block-3 .opinions-about-div .about {
@@ -1559,12 +1559,12 @@ th {
   }
 
   .opinions-stack {
-    min-height: clamp(20rem, 54vh, 34rem);
+    min-height: clamp(20rem, 52vh, 30rem);
   }
 
   @supports (width: 1cqw) {
     .opinions-stack {
-      min-height: clamp(20rem, calc(78cqw * 852 / 681), 36rem);
+      min-height: clamp(20rem, calc(70cqw * 852 / 681), 30rem);
     }
   }
 
@@ -1573,6 +1573,7 @@ th {
   }
 
   .opinion-tile {
+    width: min(72%, 17rem);
     padding: 0.85rem 0.75rem 1rem;
   }
 

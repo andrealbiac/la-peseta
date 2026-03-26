@@ -145,6 +145,7 @@
       for (var i = 0; i < loaded.length; i++) {
         var item = loaded[i];
         var isBullet = item.spec.src.indexOf("estudios-bullet.svg") !== -1;
+        var isATriangle = item.spec.src.indexOf("A-1.svg") !== -1 || item.spec.src.indexOf("A-2.svg") !== -1;
         var dimH = targetH * (isBullet ? 0.6 : 1);
         var dimW = item.spec.nw * (dimH / item.spec.nh);
         var texW = item.img.width || item.spec.nw;
@@ -154,7 +155,7 @@
         var x = gutter + (innerW - maxX) * 0.5 + Math.random() * maxX;
         var y = Math.max(10, H * 0.18 + Math.random() * H * 0.12);
 
-        var body = Bodies.rectangle(x + dimW / 2, y, dimW, dimH, {
+        var commonOpts = {
           frictionAir: 0.006,
           restitution: 0.14,
           friction: 0.02,
@@ -166,7 +167,33 @@
               yScale: dimH / texH,
             },
           },
-        });
+        };
+
+        var cx = x + dimW / 2;
+        var cy = y;
+        var body;
+
+        if (isATriangle) {
+          // Upright triangle: top-center + two bottom corners.
+          // This matches the intended A collider footprint.
+          body = Bodies.fromVertices(
+            cx,
+            cy,
+            [[
+              { x: 0, y: -dimH * 0.5 },
+              { x: -dimW * 0.5, y: dimH * 0.5 },
+              { x: dimW * 0.5, y: dimH * 0.5 },
+            ]],
+            commonOpts,
+            true
+          );
+        } else if (isBullet) {
+          // Ellipse shape for estudios-bullet.
+          body = Bodies.circle(cx, cy, 1, commonOpts);
+          Body.scale(body, dimW * 0.55, dimH * 0.55);
+        } else {
+          body = Bodies.rectangle(cx, cy, dimW, dimH, commonOpts);
+        }
         letterBodies.push(body);
       }
       Composite.add(engine.world, letterBodies);
@@ -277,11 +304,8 @@
       requestAnimationFrame(function () {
         scheduleResize();
 
-        // Start the simulation only when the user scrolls to the section.
-        var section =
-          stage.closest(".block-section.block-3") ||
-          stage.closest(".block-section") ||
-          stage.closest(".playground");
+        // Start the simulation only when the playground div enters view.
+        var section = stage.closest(".playground") || stage;
         function maybeStart() {
           if (started) return;
           started = true;
@@ -310,8 +334,7 @@
               io.disconnect();
             }
           },
-          // Trigger slightly before the section fully settles into view.
-          { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0 }
+          { root: null, rootMargin: "0px", threshold: 0.05 }
         );
         io.observe(section);
       });
