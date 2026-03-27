@@ -14,7 +14,7 @@
   --blue: #b8d3ff;
   --index-pill-1: #a0bdf2;
   --index-pill-2: #6dbb87;
-  --index-pill-3: #fcc3c3;
+  --index-pill-3: #ebd0b1;
 }
 
 /* =============================================================================
@@ -536,7 +536,7 @@ th {
 }
 
 .summary-course:nth-child(3) .summary-course-badge {
-  background: #fcc3c3;
+  background: var(--summary-mint);
 }
 
 .summary-course-body {
@@ -1522,7 +1522,7 @@ th {
 
   .block-3 .opinions-about-div .opinions-panel {
     min-height: unset;
-    padding-block: 2.5rem 2.75rem;
+    padding-block: 3rem 3.25rem;
   }
 
   .block-3 .opinions-about-div .about {
@@ -1559,7 +1559,7 @@ th {
     margin-top: 10rem;
     padding-inline: 1.25rem;
     padding-bottom: 2.25rem;
-    gap: 1.1rem;
+    gap: 0;
   }
 
   .site-footer-links {
@@ -1569,17 +1569,17 @@ th {
   }
 
   .site-footer-credit {
-    margin-top: 0.2rem;
+    margin-top: 0;
     margin-left: 0;
   }
 
   .opinions-stack {
-    min-height: clamp(20rem, 52vh, 30rem);
+    min-height: clamp(21rem, 56vh, 32rem);
   }
 
   @supports (width: 1cqw) {
     .opinions-stack {
-      min-height: clamp(20rem, calc(70cqw * 852 / 681), 30rem);
+      min-height: clamp(21rem, calc(73cqw * 852 / 681), 32rem);
     }
   }
 
@@ -1588,7 +1588,7 @@ th {
   }
 
   .opinion-tile {
-    width: min(72%, 17rem);
+    width: min(75%, 18rem);
     padding: 0.85rem 0.75rem 1rem;
   }
 
