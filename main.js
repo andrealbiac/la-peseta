@@ -127,6 +127,16 @@
   var stickers = [guitar, lamp, mug, bag].filter(Boolean);
   if (!container || !stickers.length) return;
 
+  var dragCue = document.querySelector(".cover-drag-cue");
+  var dragCueHidden = false;
+  var DRAG_CUE_HIDE_PX_SQ = 36;
+
+  function hideDragCue() {
+    if (dragCueHidden || !dragCue) return;
+    dragCueHidden = true;
+    dragCue.classList.add("is-hidden");
+  }
+
   var active = null;
   var startX = 0, startY = 0;
   var startLeft = 0, startTop = 0;
@@ -182,6 +192,9 @@
     var h = r.height;
     var dx = xy.x - startX;
     var dy = xy.y - startY;
+    if (!dragCueHidden && dx * dx + dy * dy >= DRAG_CUE_HIDE_PX_SQ) {
+      hideDragCue();
+    }
     var newLeft = startLeft + dx;
     var newTop = startTop + dy;
     active.style.left = Math.max(w / 2, Math.min(rect.width - w / 2, newLeft)) + "px";
