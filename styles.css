@@ -1478,7 +1478,8 @@ th {
   }
 
   .course-block {
-    scroll-margin-top: 3.5rem;
+    /* Extra space below sticky index bar when jumping to #course-* */
+    scroll-margin-top: 5.5rem;
     max-width: 100%;
   }
 
@@ -1558,6 +1559,10 @@ th {
 
   .block-2 .index .index-btn-label {
     font-size: clamp(0.95rem, 4.2vw, 1.12rem);
+  }
+
+  .course-block {
+    scroll-margin-top: 6rem;
   }
 
   .block-2 .courses .course-cta {
