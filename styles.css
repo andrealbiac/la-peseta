@@ -1224,6 +1224,11 @@ th {
     font-size: 1.32rem;
     line-height: 1.55;
   }
+
+  .site-footer-credit {
+    font-size: 1.28rem;
+    line-height: 1.4;
+  }
 }
 
 /* Tight two-column: full-width summary stack + hero text tweak */
