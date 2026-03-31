@@ -327,6 +327,7 @@ th {
   letter-spacing: 0.02em;
   text-align: center;
   width: 100%;
+  white-space: pre-line;
 }
 
 .cover-drag-cue__arrow {
