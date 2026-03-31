@@ -1011,9 +1011,10 @@ th {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: min(86%, 100%);
+  width: min(86%, calc(85vh * 681 / 852));
   aspect-ratio: 681 / 852;
   height: auto;
+  max-height: 80vh;
   box-sizing: border-box;
   padding: clamp(0.85rem, 5.8%, 1.65rem) clamp(0.8rem, 5.2%, 1.45rem) clamp(1rem, 6.2%, 1.65rem);
   display: flex;
@@ -1800,5 +1801,18 @@ th {
   .sticker--bag {
     max-width: 75px;
     top: 35%;
+  }
+}
+
+/* Narrow + horizontal screens:
+   constrain opinion tiles by viewport height and aspect ratio. */
+@media (max-width: 500px) and (min-aspect-ratio: 11/8) {
+  .opinions-stack {
+    min-height: clamp(14.5rem, 40vh, 19rem);
+  }
+
+  .opinion-tile {
+    width: min(62%, 13.5rem, 28vh);
+    top: 48%;
   }
 }
