@@ -1,8 +1,6 @@
 backend:
-  name: github
-  repo: andrealbiac/la-peseta
+  name: git-gateway
   branch: main
-  base_url: https://sunny-pudding-05420f.netlify.app
 
 media_folder: img
 
