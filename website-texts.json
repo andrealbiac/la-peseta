@@ -90,6 +90,7 @@
     "about.photo_alt": "Andrea Lafuente",
     "playground.label": "Playground",
     "footer.nav_aria": "Contacto y newsletter",
+    "footer.newsletter_label": "Newsletter",
     "footer.credit_prefix": "Diseño y web:",
     "ui.to_en": "Cambiar el sitio a inglés",
     "ui.to_es": "Cambiar el sitio a español"
@@ -185,6 +186,7 @@
     "about.photo_alt": "Andrea Lafuente",
     "playground.label": "Playground",
     "footer.nav_aria": "Contact and newsletter",
+    "footer.newsletter_label": "Newsletter",
     "footer.credit_prefix": "Website and design:",
     "ui.to_en": "Switch site to English",
     "ui.to_es": "Switch site to Spanish"

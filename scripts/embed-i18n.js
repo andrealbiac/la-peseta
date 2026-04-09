@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 /**
- * After editing i18n.json, run: node scripts/embed-i18n.js
+ * After editing website-texts.json, run: node scripts/embed-i18n.js
  * Refreshes the EMBEDDED_I18N fallback inside i18n.js (for file:// and offline).
  */
 const fs = require("fs");
 const path = require("path");
 
 const root = path.join(__dirname, "..");
-const jsonPath = path.join(root, "i18n.json");
+const jsonPath = path.join(root, "website-texts.json");
 const i18nJsPath = path.join(root, "i18n.js");
 
 const bundle = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
