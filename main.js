@@ -4,42 +4,22 @@
  */
 
 /* =============================================================================
-   Letters & play melody
+   Letters & play melody (sample playback via Web Audio API)
    ============================================================================= */
 (function () {
   var audioContext = null;
+  var bufferCache = {};
+  var loadPromises = {};
 
-  function getAudioContext() {
-    if (!audioContext) {
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    return audioContext;
-  }
-
-  function playNote(frequency) {
-    var ctx = getAudioContext();
-    var now = ctx.currentTime;
-    var osc = ctx.createOscillator();
-    var gain = ctx.createGain();
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.type = "sine";
-    osc.frequency.value = frequency;
-    gain.gain.setValueAtTime(0.55, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
-    osc.start(now);
-    osc.stop(now + 0.38);
-  }
-
-  var letterToFrequency = {
-    "letter--l": 262,
-    "letter--a-a1": 294,
-    "letter--p": 330,
-    "letter--e-e1": 349,
-    "letter--s": 392,
-    "letter--e-e2": 440,
-    "letter--t": 494,
-    "letter--a-a2": 523
+  var letterToSoundUrl = {
+    "letter--l": "./sounds/L.wav",
+    "letter--a-a1": "./sounds/A.wav",
+    "letter--p": "./sounds/P.wav",
+    "letter--e-e1": "./sounds/E.wav",
+    "letter--s": "./sounds/S.wav",
+    "letter--e-e2": "./sounds/E2.wav",
+    "letter--t": "./sounds/T.wav",
+    "letter--a-a2": "./sounds/A2.wav"
   };
 
   var melodyOrder = [
@@ -53,6 +33,95 @@
     "letter--a-a2"
   ];
 
+  function getAudioContext() {
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    return audioContext;
+  }
+
+  function loadBuffer(url) {
+    return fetch(url)
+      .then(function (r) {
+        if (!r.ok) throw new Error("sound fetch failed: " + url);
+        return r.arrayBuffer();
+      })
+      .then(function (ab) {
+        var ctx = getAudioContext();
+        return ctx.decodeAudioData(ab.slice(0));
+      });
+  }
+
+  function ensureBuffer(classKey) {
+    var url = letterToSoundUrl[classKey];
+    if (!url) return Promise.reject(new Error("unknown letter key"));
+    if (bufferCache[classKey]) return Promise.resolve(bufferCache[classKey]);
+    if (!loadPromises[classKey]) {
+      loadPromises[classKey] = loadBuffer(url).then(function (buf) {
+        bufferCache[classKey] = buf;
+        return buf;
+      });
+    }
+    return loadPromises[classKey];
+  }
+
+  var warnedFileProtocol = false;
+
+  function playWithHtmlAudio(url) {
+    var a = new Audio(url);
+    a.play().catch(function () {
+      if (window.location.protocol === "file:" && !warnedFileProtocol) {
+        warnedFileProtocol = true;
+        console.warn(
+          "La Peseta: letter sounds often do not load from file://. Run a local server, e.g. python3 -m http.server, then open http://localhost:8000"
+        );
+      }
+    });
+  }
+
+  function resumeContext() {
+    var ctx = getAudioContext();
+    if (ctx.state === "suspended" && typeof ctx.resume === "function") {
+      return ctx.resume().catch(function () {});
+    }
+    return Promise.resolve();
+  }
+
+  function playBuffer(buffer) {
+    var ctx = getAudioContext();
+    var src = ctx.createBufferSource();
+    src.buffer = buffer;
+    src.connect(ctx.destination);
+    src.start(0);
+  }
+
+  function playSoundForKey(classKey) {
+    var url = letterToSoundUrl[classKey];
+    if (!url) return;
+    if (bufferCache[classKey]) {
+      resumeContext().then(function () {
+        playBuffer(bufferCache[classKey]);
+      });
+      return;
+    }
+    resumeContext()
+      .then(function () {
+        return ensureBuffer(classKey);
+      })
+      .then(playBuffer)
+      .catch(function () {
+        playWithHtmlAudio(url);
+      });
+  }
+
+  function preloadAllSounds() {
+    melodyOrder.forEach(function (key) {
+      ensureBuffer(key).catch(function () {
+        /* file:// or missing file — HTMLAudio fallback on first click */
+      });
+    });
+  }
+
   function triggerLetterAnimation(el) {
     el.classList.remove("letter--playing");
     el.offsetHeight;
@@ -62,17 +131,20 @@
     }, 360);
   }
 
-  function playLetter(el) {
-    var key = null;
+  function getLetterKey(el) {
     for (var i = 0; i < el.classList.length; i++) {
-      if (letterToFrequency.hasOwnProperty(el.classList[i])) {
-        key = el.classList[i];
-        break;
+      if (letterToSoundUrl.hasOwnProperty(el.classList[i])) {
+        return el.classList[i];
       }
     }
+    return null;
+  }
+
+  function playLetter(el) {
+    var key = getLetterKey(el);
     if (!key) return;
-    playNote(letterToFrequency[key]);
     triggerLetterAnimation(el);
+    playSoundForKey(key);
   }
 
   function onLetterClick(e) {
@@ -97,15 +169,22 @@
       }
     });
     var stepMs = 160;
-    melodyOrder.forEach(function (key, i) {
-      setTimeout(function () {
-        var el = map[key];
-        if (el) {
-          playNote(letterToFrequency[key]);
+    resumeContext().then(function () {
+      melodyOrder.forEach(function (key, i) {
+        setTimeout(function () {
+          var el = map[key];
+          if (!el) return;
           triggerLetterAnimation(el);
-        }
-      }, i * stepMs);
+          playSoundForKey(key);
+        }, i * stepMs);
+      });
     });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", preloadAllSounds);
+  } else {
+    preloadAllSounds();
   }
 
   var lettersEl = document.querySelector(".letters");
