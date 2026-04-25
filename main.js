@@ -412,7 +412,7 @@
   const tiles = Array.from(stack.querySelectorAll(".opinion-tile"));
   const SWIPE_PX = 48;
   const TAP_PX = 12;
-  const AUTO_MS = 4000;
+  const AUTO_MS = 10000;
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
